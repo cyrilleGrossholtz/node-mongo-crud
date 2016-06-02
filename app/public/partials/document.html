@@ -1,0 +1,12 @@
+<ul  class="nav nav-pills">
+    <li ng-class="{active:type == 'connexion'}"><a href="#">Databases</a></li>
+    <li ng-class="{active:type == 'database',disabled:(type == 'connexion')}"><a href="#/db/{{dbid}}/">Collections</a></li>
+    <li ng-class="{active:type == 'collection',disabled:(type == 'database' || type == 'connexion')}"><a href="#/db/{{dbid}}/collection/{{collectionid}}">Documents</a></li>
+    <li ng-class="{active:type == 'document',disabled:(type == 'collection' || type == 'database' || type == 'connexion')}"><a href="#/db/{{dbid}}/collection/{{collectionid}}/document/{{documentid}}/">Document detail</a></li>
+</ul>
+<section>
+
+</section>
+
+{{JSONObject}}
+<footer>{{title}}</footer>

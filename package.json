@@ -1,0 +1,10 @@
+{
+  "name": "node-mongo-crud",
+  "description": "MongoDB explorer started from a NodeJS Server",
+  "repository": "https://github.com/cyrilleGrossholtz/node-mongo-crud",
+  "dependencies": {
+    "config": "^1.20.4",
+    "express": "~3.4.7",
+    "mongodb": "^2.1.21"
+  }
+}

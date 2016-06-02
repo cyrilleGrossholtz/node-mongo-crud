@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+                <script src="/public/lib/jquery-1.9.1.min.js"></script>
+        <script src="/public/lib/underscore-min.js"></script>
+        <script src="/public/lib/angular/angular.js"></script>
+        <script>
+            function MyController($scope) {
+                $scope.fields = {
+                    test: ["aaa","bbb","ccc"]
+                }
+            }
+            ;
+        </script>
+        <div ng-app ng-controller="MyController">
+            <ul>
+                <li ng-repeat="field in fields.test track by $index">
+                    <input type="text"  ng-model="fields.test[$index]">
+                </li>
+            </ul>
+            <pre>{{fields}}</pre>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<nav class="navbar-inverse collapse navbar-collapse navbar-fixed-top" role="navigation">
+    <ul class="nav navbar-nav">
+        <li ng-class="{active:type == 'connexion'}"><a href="#">{{dbid?"Database : ":"Databases"}}{{dbid}}</a></li>
+        <li ng-class="{active:type == 'database',hidden:(type == 'connexion')}"><a href="#/db/{{dbid}}/">{{collectionid?"Collection : ":"Collections"}}{{collectionid}}</a></li>
+        <li ng-class="{active:type == 'collection',hidden:(type == 'database' || type == 'connexion')}"><a href="#/db/{{dbid}}/collection/{{collectionid}}">{{documentid?"Document : ":"Documents"}}{{documentid}}</a></li>
+        <li ng-class="{active:type == 'document',hidden:(type == 'collection' || type == 'database' || type == 'connexion')}"><a href="#/db/{{dbid}}/collection/{{collectionid}}/document/{{documentid}}/">Document detail</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" ng-class="{hidden:(type == 'document')}">
+        <li ng-class="{active:order}"><a ng-click="order = !order">order columns</a></li>
+    </ul>
+    <button class="btn btn-default navbar-btn navbar-right" ng-click="save()" type="button" ng-class="{'disabled':btnUpdate == 0,'btn-success':btnUpdate == 2,'btn-primary':btnUpdate == 1,'hidden':!displaySaveButton}">Confirm Changes</button>
+    <div ng-switch="type">
+        <div ng-switch-when="connexion">
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input ng-model="input.newDatabase" id="newDatabase" type="text" class="form-control" placeholder="Database name">
+                </div>
+                <button type="submit" class="btn btn-default" ng-click="add()">Create Database</button>
+            </form>
+        </div>
+        <div ng-switch-when="database">
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input ng-model="input.newCollection" id="newCollection" type="text" class="form-control" placeholder="Collection name">
+                </div>
+                <button type="submit" class="btn btn-default" ng-click="add()">Create collection</button>
+            </form>
+        </div>
+        <div ng-switch-when="collection">
+            <form class="navbar-form navbar-right" role="search">
+                <button type="submit" class="btn btn-default" ng-click="add()">Create document</button>
+            </form>
+        </div>
+</nav>
+<section>
+
+    <div ng-switch="type">
+        <div ng-switch-when="document">
+            <div db-list element="document" field="field"></div>
+        </div>
+        <div ng-switch-default>
+            <div class="gridStyle" ng-grid="gridOptions"></div>
+        </div>
+    </div>
+    {{JSONObject}}
+</section>
+<footer>{{title}}</footer>
