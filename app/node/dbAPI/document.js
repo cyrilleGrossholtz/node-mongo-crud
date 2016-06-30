@@ -3,8 +3,6 @@ var mongo = require('mongodb');
 
 var ObjectID = mongo.ObjectID;
 
-var BSON = mongo.BSONPure;
-
 exports.findAll = findAll;
 exports.findById = findById;
 exports.update = update;

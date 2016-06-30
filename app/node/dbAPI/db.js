@@ -40,7 +40,7 @@ function del(req, res) {
 function create(req, res) {
     var dbid = req.params.dbid;
     console.log('db.delete', dbid);
-    db.changeDB(dbid, function(err, db) {
+    dbConnexion.useDB(dbid, function(err, db) {
         if(err) {
             return res.send({'error': err});
         }

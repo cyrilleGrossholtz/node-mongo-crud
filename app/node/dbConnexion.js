@@ -12,22 +12,27 @@ exports.manageError = manageError;
 function useDB(newDB, callback) {
     console.log('useDB');
     if(!isConnected) {
-        return MongoClient.connect('mongodb://'+config.host+':'+config.port+'/test', function(err, newDb) {
+        var url = 'mongodb://'+config.host+':'+config.port+'/'+newDB;
+        console.log(url);
+        return MongoClient.connect(url, function(err, newDb) {
             if(err) {
                 return callback(err);
             }
 
             isConnected = true;
             db = newDb;
-            useDB(newDB, callback);
+            callback(false, db);
         });
     } else {
-        db.db(newDB);
+        db = db.db(newDB);
         callback(false, db);
     }
 }
 
 function getAdmin(callback) {
+    if(isConnected)
+        return callback(false, db.admin());
+
     useDB('test', function(err, db) {
         if(err) {
             return callback(err);
